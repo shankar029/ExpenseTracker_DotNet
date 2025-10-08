@@ -1,0 +1,103 @@
+### Variables
+@baseUrl = http://localhost:5000
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidGVzdHVzZXIiLCJleHAiOjE3Mjg0MDY2MzIsImlzcyI6IkV4cGVuc2VUcmFja2VyQXBpIiwiYXVkIjoiRXhwZW5zZVRyYWNrZXJDbGllbnQifQ.vC8v1xb6YY-Ey9hbR1TZc8hWV5ROzYAKj5cKIFNOqQs
+
+### 1. Get Categories
+GET {{baseUrl}}/api/expense/categories
+Authorization: Bearer {{token}}
+
+### 2. Create a new expense
+POST {{baseUrl}}/api/expense
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "amount": 25.99,
+  "description": "Lunch at restaurant",
+  "category": "Food",
+  "date": "2024-10-08"
+}
+
+### 3. Create another expense
+POST {{baseUrl}}/api/expense
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "amount": 15.50,
+  "description": "Bus fare",
+  "category": "Transportation",
+  "date": "2024-10-08"
+}
+
+### 4. Create a third expense
+POST {{baseUrl}}/api/expense
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "amount": 45.00,
+  "description": "Grocery shopping",
+  "category": "Shopping",
+  "date": "2024-10-07"
+}
+
+### 5. Get all expenses (first page)
+GET {{baseUrl}}/api/expense?page=1&limit=10
+Authorization: Bearer {{token}}
+
+### 6. Get expenses with category filter
+GET {{baseUrl}}/api/expense?category=Food
+Authorization: Bearer {{token}}
+
+### 7. Get expenses with date range filter
+GET {{baseUrl}}/api/expense?date_from=2024-10-07&date_to=2024-10-08
+Authorization: Bearer {{token}}
+
+### 8. Get specific expense by ID (replace {id} with actual ID from previous responses)
+GET {{baseUrl}}/api/expense/1
+Authorization: Bearer {{token}}
+
+### 9. Update an expense (replace {id} with actual ID)
+PUT {{baseUrl}}/api/expense/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "amount": 30.99,
+  "description": "Updated lunch at restaurant",
+  "category": "Food",
+  "date": "2024-10-08"
+}
+
+### 10. Delete an expense (replace {id} with actual ID)
+DELETE {{baseUrl}}/api/expense/3
+Authorization: Bearer {{token}}
+
+### 11. Test invalid category
+POST {{baseUrl}}/api/expense
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "amount": 20.00,
+  "description": "Test invalid category",
+  "category": "InvalidCategory",
+  "date": "2024-10-08"
+}
+
+### 12. Test validation errors (missing required fields)
+POST {{baseUrl}}/api/expense
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "description": "Missing amount and category"
+}
+
+### 13. Test unauthorized access (no token)
+GET {{baseUrl}}/api/expense
+
+### 14. Test pagination
+GET {{baseUrl}}/api/expense?page=1&limit=2
+Authorization: Bearer {{token}}

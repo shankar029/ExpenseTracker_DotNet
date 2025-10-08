@@ -1,0 +1,57 @@
+### Test Authentication Endpoints
+
+### 1. Register a new user
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "email": "test@example.com",
+  "password": "TestPassword123!"
+}
+
+### 2. Login with the created user
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "password": "TestPassword123!"
+}
+
+### 3. Get current user info (replace TOKEN_HERE with actual token from login)
+GET http://localhost:5000/api/auth/me
+Authorization: Bearer TOKEN_HERE
+
+### 4. Logout (replace TOKEN_HERE with actual token from login)
+POST http://localhost:5000/api/auth/logout
+Authorization: Bearer TOKEN_HERE
+
+### 5. Test registration with invalid data
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "ab",
+  "email": "invalid-email",
+  "password": "weak"
+}
+
+### 6. Test login with invalid credentials
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "nonexistent",
+  "password": "wrongpassword"
+}
+
+### 7. Test duplicate registration
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "email": "test@example.com",
+  "password": "TestPassword123!"
+}
